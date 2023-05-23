@@ -1,35 +1,47 @@
 <template>
-    <div id="login">
-        <form :onsubmit="try_login" class="login">
-            <div class="top">
-                <!-- <img src="@/assets/logo.svg" alt="logo" /> -->
-                <h3> LOGIN </h3>
-            </div>
-            <!-- <formfeedback v-if="message !== ''"
-            :svg_value="'M10.2426 16.3137L6 12.071L7.41421 10.6568L10.2426 13.4853L15.8995 7.8284L17.3137 9.24262L10.2426 16.3137Z'"
-            :feedback="feedback"> {{ message }}
-        </formfeedback> -->
-            <FormInput class="login_input" :svg_value="inputs.login.username.svg"
-                @update_value="(value_username) => inputs.login.username.value = value_username"
-                :placeholder="inputs.login.username.placeholder" :type="inputs.login.username.type">
-            </FormInput>
-            <p>Count: {{ inputs.login.username.value }}</p>
-            <FormInput class="login_input" :svg_value="inputs.login.password.svg"
-                :placeholder="inputs.login.password.placeholder" :type="inputs.login.password.type">
-            </FormInput>
-            <small :onclick="forgot"> Forgot my password ? </small><br><br>
-            <FormButton :type="'submit'"> Login </FormButton>
-            <br><br>
+    <div id="loginview">
+        <div id="login">
+            <form :onsubmit="try_login" class="login">
+                <div class="top">
+                    <!-- <img src="@/assets/logo.svg" alt="logo" /> -->
+                    <h1> LOGIN </h1>
+                </div>
+                <label> USER ID </label>
+                <FormInput class="login_input" :svg_value="inputs.login.username.svg"
+                    @update_value="(value_username) => {inputs.login.username.value = value_username, message = ''}"
+                    :placeholder="inputs.login.username.placeholder" :type="inputs.login.username.type">
+                </FormInput>
+                <label> PASSWORD </label>
+                <FormInput class="login_input" :svg_value="inputs.login.password.svg"
+                    @update_value="(value_password) => {inputs.login.password.value = value_password, message = ''}"
+                    :placeholder="inputs.login.password.placeholder" :type="inputs.login.password.type">
+                </FormInput>
+                <small :onclick="forgot"> Forgot my password ? </small><br><br>
+                <FormButton :type="'submit'"> Login </FormButton>
+                <br><br>
+                <FormFeedback v-if="message !== ''"
+                    :svg_value="'M10.2426 16.3137L6 12.071L7.41421 10.6568L10.2426 13.4853L15.8995 7.8284L17.3137 9.24262L10.2426 16.3137Z'"
+                    :feedback="feedback"> {{ message }}
+                </FormFeedback>
+                <br>
 
-        </form>
+            </form>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import FormInput from '../components/FormInput.vue';
 import FormButton from '../components/FormButton.vue';
+import FormFeedback from '../components/FormFeedback.vue';
+
+const router = useRouter()
+
+const feedback = ref('error')
+const message = ref('dz')
 
 const inputs = ref({
     login: {
@@ -48,34 +60,31 @@ const inputs = ref({
     },
 })
 
-const try_login = async () => {
-    let inputs = window.document.getElementsByClassName('login_input');
-    const data_login = { username: inputs[0].childNodes[1].value, password: inputs[1].childNodes[1].value }
-    console.log(data_login);
-    /* if (check_mail(data_login.username)) {
-        const response = await fetch('http://localhost:3005/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data_login)
-        })
-        const is_user = response.status === 201 ? true : false
-        if (is_user) {
-            const res = await response.json()
-            message.value = res.message
-            feedback.value = 'success'
-            window.localStorage.setItem('token', res.token);
-            loading.value = true
-            action.value = ''
-            setTimeout(() => {
-                router.push('/')
-            }, 2000);
-        }
-        else {
+const try_login = async (e) => {
+    e.preventDefault();
 
-            message.value = "Failed";
-            feedback.value = 'error';
-        }
-    } */
+    const data_login = { username: JSON.stringify(inputs.value.login.username.value), password: JSON.stringify(inputs.value.login.password.value) }
+    console.log(data_login);
+    const response = await fetch('http://localhost:3005/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data_login)
+    })
+    const is_user = response.status === (201 || 200) ? true : false
+    if (is_user) {
+        const res = await response.json()
+        message.value = res.message
+        feedback.value = 'success'
+        window.localStorage.setItem('token', res.token);
+        setTimeout(() => {
+            router.push('/')
+        }, 2000);
+    }
+    else {
+        message.value = "Failed";
+        feedback.value = 'error';
+    }
+
 }
 
 const forgot = () => {
@@ -85,10 +94,23 @@ const forgot = () => {
 </script>
 
 <style scoped>
+.top h1 {
+    padding: 30px 0px;
+}
+
+#loginview {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 #login {
+    background-color: white;
     border: 1px solid #ccc;
     box-shadow: 1px 3px 7px #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 80px;
     width: 40%;
     margin: auto;

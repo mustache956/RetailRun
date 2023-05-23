@@ -1,5 +1,8 @@
 @import './base.css';
 
+* {
+    font-family: 'Nunito', sans-serif;
+}
 #app {
-
+    background-color: #f5f5f5;
 }
