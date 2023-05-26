@@ -6,9 +6,8 @@ const cors = require('cors')
 // Import DB Connection
 const db = require("./mongodb");
 // Import API route
-/* const routeElection = require('./app/routes/election.routes'); //importing route
-const routeUser= require('./app/routes/user.routes'); //importing route
-const routeVote = require('./app/routes/vote.routes'); //importing route */
+// Import API route
+const routeProblem = require("../backend/app/routes/problem.route"); //importing route
 
 // create express app
 const  app = express();
@@ -32,6 +31,4 @@ app.get("/", (req, res) => {
 app.listen(5000)
 
 // connect routes
-/* routeElection(app);
-routeUser(app);
-routeVote(app); */
+routeProblem(app);
