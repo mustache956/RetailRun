@@ -40,8 +40,8 @@ import FormFeedback from '../components/FormFeedback.vue';
 
 const router = useRouter()
 
-const feedback = ref('error')
-const message = ref('dz')
+const feedback = ref('success')
+const message = ref('l')
 
 const inputs = ref({
     login: {
@@ -77,6 +77,9 @@ const try_login = async (e) => {
         feedback.value = 'success'
         window.localStorage.setItem('token', res.token);
         setTimeout(() => {
+            /*
+                Task : Redirect to the real next route  
+            */      
             router.push('/')
         }, 2000);
     }
@@ -99,6 +102,7 @@ const forgot = () => {
 }
 
 #loginview {
+    background: #FFFFFF url('../assets/Hexagon.svg') center center/cover no-repeat;
     height: 100vh;
     display: flex;
     flex-direction: row;
@@ -109,7 +113,7 @@ const forgot = () => {
 #login {
     background-color: white;
     border: 1px solid #ccc;
-    box-shadow: 1px 3px 7px #ccc;
+    box-shadow: 1px 3px 7px #555555;
     border-radius: 10px;
     padding: 80px;
     width: 40%;
