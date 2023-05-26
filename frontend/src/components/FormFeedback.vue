@@ -52,10 +52,10 @@ const renderColors = (feedback: any, context: any) => {
     }
 }
 
-const currentfeed = ref(props.feedback)
+/* const currentfeed = ref(props.feedback)
 watchEffect(() => {
     alert(currentfeed.value)
-})
+}) */
 </script>
     
 <style scoped>
