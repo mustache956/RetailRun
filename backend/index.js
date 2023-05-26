@@ -6,11 +6,12 @@ const cors = require('cors')
 // Import DB Connection
 const db = require("./mongodb");
 // Import API route
-// Import API route
-const routeProblem = require("../backend/app/routes/problem.route"); //importing route
+const routeProblem = require("../backend/app/routes/problem.route");
+const routeProduct = require("../backend/app/routes/product.route");
+const routeUser = require("../backend/app/routes/user.route");
 
 // create express app
-const  app = express();
+const app = express();
 
 // use bodyParser middleware on express app
 app.use(bodyParser.urlencoded({ extended:true }));
@@ -32,3 +33,5 @@ app.listen(5000)
 
 // connect routes
 routeProblem(app);
+routeProduct(app);
+routeUser(app);
