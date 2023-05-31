@@ -1,6 +1,6 @@
 <template>
-    <div id="loginview">
-        <div id="login">
+    <div id="backgroundview">
+        <div id="form">
             <form :onsubmit="try_login" class="login">
                 <div class="top">
                     <!-- <img src="@/assets/logo.svg" alt="logo" /> -->
@@ -101,22 +101,4 @@ const forgot = () => {
     padding: 30px 0px;
 }
 
-#loginview {
-    background: #FFFFFF url('../assets/Hexagon.svg') center center/cover no-repeat;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#login {
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 1px 3px 7px #555555;
-    border-radius: 10px;
-    padding: 80px;
-    width: 40%;
-    margin: auto;
-}
 </style>
