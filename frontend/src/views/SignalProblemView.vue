@@ -27,6 +27,7 @@ import FormButton from "@/components/FormButton.vue";
 import {ref} from "vue";
 import FormSelect from "@/components/FormSelect.vue";
 import FormTextArea from "@/components/FormTextArea.vue";
+import router from "@/router";
 
 
 const inputs = ref({
@@ -52,6 +53,7 @@ const signalProblem = async (e) => {
         .post("/problem/createProblem",data_problem)
         .then((response) => {
             console.log(response);
+            router.push('/')
         })
         .catch((error) => {
             console.log(error);
