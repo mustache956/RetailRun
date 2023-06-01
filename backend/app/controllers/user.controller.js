@@ -31,7 +31,7 @@ exports.register = (req, res) => {
 
 //user Sign-in
 exports.signIn = (req, res) => {
-    User.findOne({email: req.param.email}).then(user => { 
+    User.findOne({email: req.body.email}).then(user => {
         if (user == null){
             res.status(401).json({ message: 'Authentication failed. email does not exist' });
         }

@@ -41,7 +41,7 @@ import FormFeedback from '../components/FormFeedback.vue';
 const router = useRouter()
 
 const feedback = ref('success')
-const message = ref('l')
+const message = ref('')
 
 const inputs = ref({
     login: {
@@ -63,14 +63,16 @@ const inputs = ref({
 const try_login = async (e) => {
     e.preventDefault();
 
-    const data_login = { username: JSON.stringify(inputs.value.login.username.value), password: JSON.stringify(inputs.value.login.password.value) }
+    const data_login = { mail: inputs.value.login.username.value, password: inputs.value.login.password.value }
     console.log(data_login);
-    const response = await fetch('http://localhost:3005/api/login', {
+    const response = await fetch('http://localhost:5000/api/user/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data_login)
     })
-    const is_user = response.status === (201 || 200) ? true : false
+    console.log(response.status);
+    const is_user = response.status === 200;
+    console.log(is_user);
     if (is_user) {
         const res = await response.json()
         message.value = res.message
