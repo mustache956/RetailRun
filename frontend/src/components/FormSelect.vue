@@ -1,7 +1,7 @@
 <template>
         <div class="select">
             <select   @input="$emit('update_value', $event.target.value)">
-                <option selected>Select an option</option>
+                <option selected>Selectionner une option</option>
                 <option v-for="(option,index) in options" :key="index" :value="option" >{{option}}</option>
             </select>
         </div>

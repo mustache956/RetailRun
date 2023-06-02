@@ -1,6 +1,6 @@
 <template>
     <div class="text_area">
-        <textarea name="description" required @input="$emit('update_value', $event.target.value)"></textarea>
+        <textarea rows="" name="description" required @input="$emit('update_value', $event.target.value)"></textarea>
     </div>
 </template>
 
@@ -25,6 +25,7 @@ textarea{
     border-radius: 5px;
     outline: none;
     height: 50px;
+    resize: none;
 }
 
 

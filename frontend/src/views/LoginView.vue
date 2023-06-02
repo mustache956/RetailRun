@@ -103,4 +103,42 @@ const forgot = () => {
     padding: 30px 0px;
 }
 
+@media screen and (max-width: 1500px){
+    #backgroundview{
+        height: 130vh;
+    }
+}
+
+@media screen and (max-width: 930px){
+    #backgroundview{
+        height: 200vh;
+    }
+    #form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    #backgroundview{
+        height: 210vh;
+    }
+    #form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 430px){
+    #form{
+        width:90%;
+    }
+
+}
+
+@media screen and (max-width: 280px){
+    #form{
+        width:80%;
+    }
+
+}
+
 </style>
