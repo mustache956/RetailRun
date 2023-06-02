@@ -9,7 +9,7 @@
                     fill="currentColor" />
             </svg>
         </div>
-        <input :type="type" :placeholder="placeholder" :value="input_value" @input="$emit('update_value', $event.target.value)">
+        <input :disabled="disabled" :type="type" :placeholder="placeholder" :value="input_value" @input="$emit('update_value', $event.target.value)">
     </div>
 </template>
 
@@ -26,6 +26,9 @@ defineProps({
     placeholder: {
         type: String,
         required: true
+    },
+    disabled:{
+        type: String
     }
 })
 /* const input_value_updated = defineEmits('update_input_value') */

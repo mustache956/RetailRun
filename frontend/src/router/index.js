@@ -7,8 +7,9 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      component: () => import('../views/HomeView.vue')
       /* component: HomeView, */
-      redirect: '/login'
+     // redirect: '/login'
     },
     {
       path: '/about',
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: () => import('../views/LoginView.vue')
+    },
+    {
+      path: '/signalProblem',
+      name: 'SignalProblem',
+      component: () => import('../views/SignalProblemView.vue')
     }
   ]
 })
