@@ -3,6 +3,9 @@
 * {
     font-family: 'Nunito', sans-serif;
 }
-#app {
+body {
     background-color: #f5f5f5;
 }
+/* #app {
+    background-color: #f5f5f5;
+} */
