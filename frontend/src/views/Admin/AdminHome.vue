@@ -12,7 +12,7 @@
             </button>
         </div>
         <div class="right">
-            <h3> {{ current_section }} </h3>
+            <h1> {{ current_section }} </h1>
             <component :is='current_component' />
         </div>
     </div>
@@ -36,15 +36,16 @@ const check_active_tab = (tab) => {
 
 <style scoped>
 #adminhome {
-    min-height: 100vh;
+   /*  min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; 
     grid-template-rows: .5fr 4fr;
     gap: 30px 0px;
     grid-auto-flow: row;
-    grid-template-areas: "." ".";
+    grid-template-areas: "." "."; */
 }
 .left {
+    height: 100px;
     text-align: center;
     padding: 0px;
     display: grid;
@@ -59,11 +60,12 @@ const check_active_tab = (tab) => {
     background-color: red;
 }
 .right {
+    position: relative;
     width: 60%;
     margin: auto;
     padding: 0px 40px;
 }
-.right h3 {
+.right h1 {
     padding: 30px 0;
 }
 </style>

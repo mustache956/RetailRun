@@ -7,8 +7,9 @@
             </FormInput>
             <select class="div2" name="pets" id="pet-select" v-model="data.rayon">
                 <option value=""> Rayon </option>
-                <option value="dog">Dog</option>
-                <option value="cat">Cat</option>
+                <option value="Patisserie">Patisserie</option>
+                <option value="Fromage">Fromage</option>
+                <option value="Surgelés">Surgelés</option>
             </select>
             <FormInput :svg_value="data.prix.svg" class="div3"
                 @update_value="(name) => { data.prix.value = name, message = '' }" :placeholder="data.prix.placeholder"
@@ -61,7 +62,8 @@ const data = ref({
 })
 
 const addProduit = async () => {
-    const response = await fetch('http://localhost:3005/api/login', {
+    /* Backend ...  */
+    const response = await fetch('http://localhost:3005/api/addProduit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.parse(JSON.stringify(data.value))
@@ -73,6 +75,10 @@ const addProduit = async () => {
 </script>
     
 <style scoped>
+
+#ajouter {
+    
+}
 
 form {
     display: grid;
