@@ -2,14 +2,14 @@
 
 <template>
     <div class="input">
-        <div class="svg">
+        <div class="svg" v-if="svg_value">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path color="gray" fill-rule="evenodd" clip-rule="evenodd"
                     :d="svg_value"
                     fill="currentColor" />
             </svg>
         </div>
-        <input :type="type" :placeholder="placeholder" :value="input_value" @input="$emit('update_value', $event.target.value)">
+        <input :disabled="disabled" :type="type" :placeholder="placeholder" :value="input_value" @input="$emit('update_value', $event.target.value)">
     </div>
 </template>
 
@@ -26,6 +26,9 @@ defineProps({
     placeholder: {
         type: String,
         required: true
+    },
+    disabled:{
+        type: String
     }
 })
 /* const input_value_updated = defineEmits('update_input_value') */
