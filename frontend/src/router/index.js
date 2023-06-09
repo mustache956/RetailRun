@@ -28,7 +28,12 @@ const router = createRouter({
       path: '/signalProblem',
       name: 'SignalProblem',
       component: () => import('../views/SignalProblemView.vue')
-    }
+    },
+    { 
+      path: '/admin',
+      name: 'AdminHome', 
+      component: () => import('../views/Admin/AdminHome.vue')
+    },
   ]
 })
 
