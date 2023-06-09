@@ -26,59 +26,25 @@
 
 <script>
 
-import getAllProducts from '@/backend/app/routes/products.route/getAllProducts'
+import http from '../../http-common';
 
 export default {
   name: 'ProductView',
   data () {
     return {
       search: '',
-      products: [
-        {
-          id: 1,
-          name: 'chips',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 10
-        },
-        {
-          id: 2,
-          name: 'eau',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 20
-        },
-        {
-          id: 3,
-          name: 'pomme',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 30
-        },
-        {
-          id: 4,
-          name: 'biere',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 40
-        },
-        {
-          id: 5,
-          name: 'stylo',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 50
-        },
-        {
-          id: 6,
-          name: 'riz',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 60
-        },
-        {
-          id: 7,
-          name: 'pâtes',
-          image: 'https://m.media-amazon.com/images/I/8141nrQe0aL._AC_UF894,1000_QL80_.jpg',
-          price: 70
-        }
-      ],
-      search: ''
+      products: [],
     }
+  },
+  created() {
+    http.get('/product/getAllProducts')
+    .then(response => {
+      console.log(response)
+      this.products = response.data
+    })
+    .catch(e => {
+      console.log(e)
+    })
   },
   computed: {
     filteredProducts() {
@@ -86,7 +52,7 @@ export default {
         return product.name.toLowerCase().match(this.search.toLowerCase())
       })
     }
-  },
+  }
 }
 
 </script>

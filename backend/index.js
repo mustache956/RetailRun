@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: 'http://localhost:8081/',
-  optionsSuccessStatus: 200
+  origin: 'http://localhost:3078',
+  optionsSuccessStatus: 200,
 }
 app.use(cors(corsOptions))
 
