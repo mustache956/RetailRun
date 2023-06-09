@@ -6,10 +6,10 @@
                     <h1>SIGNALER UN PROBLEME</h1>
                 </div>
                 <label>TYPE DE PROBLEME</label>
-               <FormSelect  :options="inputs.types" @update_value="
+               <FormSelect :options="inputs.types" @update_value="
                (value_type) => {inputs.problem.type = value_type;}"></FormSelect>
-                <label>NOUVEAU TYPE DE PROBLEME</label>
-                <FormInput @update_value="(value_newType) => {inputs.problem.newType = value_newType;}" :svg_value="inputs.icons.svg" placeholder="Renseigner un nouveau problème" type="text"></FormInput>
+                <label v-if="inputs.problem.type === 'Autre'">NOUVEAU TYPE DE PROBLEME</label>
+                <FormInput v-if="inputs.problem.type === 'Autre'" @update_value="(value_newType) => {inputs.problem.newType = value_newType;}" :svg_value="inputs.icons.svg" placeholder="Renseigner un nouveau problème" type="text"></FormInput>
                 <label>RAYON DU MAGASIN</label>
                <FormSelect :options="inputs.store_shelves"
                            @update_value="(value_shelf) => {inputs.problem.store_shelf = value_shelf}"></FormSelect>
@@ -35,7 +35,7 @@ import FormInput from "@/components/FormInput.vue";
 
 
 const inputs = ref({
-    types: ["Produit manquant", "Propreté du rayon"],
+    types: ["Produit manquant", "Propreté du rayon", "Autre"],
     store_shelves: ["Fruits et Légumes", "Epicerie", "Liquides", "Surgelés", "Produits non alimentaires"],
     problem:{
         type:"",
