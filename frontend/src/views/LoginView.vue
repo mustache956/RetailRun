@@ -1,6 +1,6 @@
 <template>
-    <div id="loginview">
-        <div id="login">
+    <div id="backgroundview">
+        <div id="form">
             <form :onsubmit="try_login" class="login">
                 <div class="top">
                     <!-- <img src="@/assets/logo.svg" alt="logo" /> -->
@@ -41,7 +41,7 @@ import FormFeedback from '../components/FormFeedback.vue';
 const router = useRouter()
 
 const feedback = ref('success')
-const message = ref('l')
+const message = ref('')
 
 const inputs = ref({
     login: {
@@ -63,14 +63,16 @@ const inputs = ref({
 const try_login = async (e) => {
     e.preventDefault();
 
-    const data_login = { username: JSON.stringify(inputs.value.login.username.value), password: JSON.stringify(inputs.value.login.password.value) }
+    const data_login = { mail: inputs.value.login.username.value, password: inputs.value.login.password.value }
     console.log(data_login);
-    const response = await fetch('http://localhost:3005/api/login', {
+    const response = await fetch('http://localhost:5000/api/user/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data_login)
     })
-    const is_user = response.status === (201 || 200) ? true : false
+    console.log(response.status);
+    const is_user = response.status === 200;
+    console.log(is_user);
     if (is_user) {
         const res = await response.json()
         message.value = res.message
@@ -101,22 +103,42 @@ const forgot = () => {
     padding: 30px 0px;
 }
 
-#loginview {
-    background: #FFFFFF url('../assets/Hexagon.svg') center center/cover no-repeat;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+@media screen and (max-width: 1500px){
+    #backgroundview{
+        height: 130vh;
+    }
 }
 
-#login {
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 1px 3px 7px #555555;
-    border-radius: 10px;
-    padding: 80px;
-    width: 40%;
-    margin: auto;
+@media screen and (max-width: 930px){
+    #backgroundview{
+        height: 200vh;
+    }
+    #form{
+        width: 80%;
+    }
 }
+
+@media screen and (max-width: 700px){
+    #backgroundview{
+        height: 210vh;
+    }
+    #form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 430px){
+    #form{
+        width:90%;
+    }
+
+}
+
+@media screen and (max-width: 280px){
+    #form{
+        width:80%;
+    }
+
+}
+
 </style>

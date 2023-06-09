@@ -1,6 +1,6 @@
 <template>
     <div class="notif" :data-feedback="props.feedback"
-        :style="'background-color:' + renderColors(currentfeed, 'bg') + ';color :' + renderColors(currentfeed, 'text')  + ';border-left: 3px solid '">
+        :style="'background-color:' + renderColors(feedback, 'bg') + ';color :' + renderColors(feedback, 'text')  + ';border-left: 3px solid '">
         <span>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path :color="props.color" fill-rule="evenodd" clip-rule="evenodd" :d="props.svg_value" fill="currentColor" />

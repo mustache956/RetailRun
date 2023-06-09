@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 
 const ProblemSchema = mongoose.Schema({
 
-    nature: {
+    type: {
         type: String,
         trim: true,
         required: true
@@ -13,12 +13,12 @@ const ProblemSchema = mongoose.Schema({
       type: Date,
       default: Date.now()
     },
+    store_shelf: {
+        type: String
+    },
     description: {
         type: String,
         required: true
-    },
-    rayon: {
-        type: String
     },
     status: {
         type: Boolean,
