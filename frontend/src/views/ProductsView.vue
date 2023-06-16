@@ -13,10 +13,12 @@
         </div>
         <div class="product-right-container">
           <div class="product-price-container">
-            <p>{{ product.price }} €</p>
+            <p class="product-price-text">{{ product.price }} €</p>
           </div>
           <div class="product-button-container">
-            <button class="product-button">Trouver</button>
+            <button class="product-button">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="white"><path d="M527-120 413-413 120-527v-43l720-270-270 720h-43Zm18-114 192-503-502 192 224 86 86 225Zm-86-225Z"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -105,7 +107,16 @@ export default {
   outline: none;
   border: 0px;
   border-radius: 5px;
-  padding: 0 5px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-price-text {
+  font-weight: bold;
 }
 
 .product-button:hover {
