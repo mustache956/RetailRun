@@ -9,7 +9,7 @@
             </svg>
             <slot></slot>
         </span>
-        <button @click="resolve"> Résolu </button>
+        <button class="btn-solve" @click="resolve"> Résolu </button>
     </div>
 </template> 
     

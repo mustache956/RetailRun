@@ -7,8 +7,8 @@
                 problem.description }}</SingleProblem>
         </span>
 
-        <h3 v-if="problems.some(element => element.solved === true)"> Solved problems </h3>
-        <span v-for="problem in problems" :key="problem.id">
+        <h3 class="solved" v-if="problems.some(element => element.solved === true)"> Solved problems </h3>
+        <span class="green" v-for="problem in problems" :key="problem.id">
             <SingleProblem @solve_problem="handleSolveProblem(problem.id)" v-if="problem.solved">{{
                 problem.description }}</SingleProblem>
         </span>
@@ -25,7 +25,7 @@ const problems = ref([
         id: 1,
         type: " type ",
         rayon: " Rayon ",
-        description: " Problem with tomatoes ",
+        description: " Test with tomatoes ",
         solved: false
     },
     {
@@ -33,6 +33,13 @@ const problems = ref([
         type: " type ",
         rayon: " Rayon ",
         description: " Problem with plates ",
+        solved: false
+    },
+    {
+        id: 3,
+        type: " type ",
+        rayon: " Rayon ",
+        description: " Just ",
         solved: false
     }
 ])
@@ -43,4 +50,15 @@ const handleSolveProblem = (id) => {
 }
 </script>
     
-<style scoped></style>
+<style scoped>
+#probleme .green .notif {
+    pointer-events: none;
+    opacity: 0.6;
+    background-color: #4FCE66 !important;
+    color: #004b23 !important;
+}
+
+.solved {
+    padding: 40px 0px;
+}
+</style>
