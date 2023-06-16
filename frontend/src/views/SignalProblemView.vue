@@ -11,8 +11,8 @@
                 <div v-if="inputs.problem.type === 'Autre'">
                     <label >NOUVEAU TYPE DE PROBLEME</label>
                     <FormInput  @update_value="(value_newType) => {inputs.problem.newType = value_newType;}" :svg_value="inputs.icons.svg" placeholder="Renseigner un nouveau problème" type="text"></FormInput>
-                    <label>RAYON DU MAGASIN</label>
                 </div>
+                <label>RAYON DU MAGASIN</label>
                <FormSelect :options="inputs.store_shelves"
                            @update_value="(value_shelf) => {inputs.problem.store_shelf = value_shelf}"></FormSelect>
                 <label>DESCRIPTION</label>

@@ -5,6 +5,9 @@
                 <img src="../assets/LogoRetailRun.png" alt="RETAIL RUN" width="244">
             </div>
             <div id="btns">
+                <!-- <button @click="this.$router.push('/admin')" class="button">
+                    Rechercher un produit
+                </button> -->
                 <button @click="this.$router.push('/products')" class="button">
                     Rechercher un produit
                 </button>
