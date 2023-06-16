@@ -7,6 +7,6 @@ module.exports = function(app){
     // post request for user registration
     app.post('/api/user/register', user.register);
     // post request for user log in
-    app.post('/api/user/login/', user.signIn);
+    app.post('/api/user/login/', user.logIn);
 
 }

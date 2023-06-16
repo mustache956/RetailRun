@@ -37,8 +37,10 @@ import { useRouter } from 'vue-router';
 import FormInput from '../components/FormInput.vue';
 import FormButton from '../components/FormButton.vue';
 import FormFeedback from '../components/FormFeedback.vue';
+import {useUserStore} from '../stores/auth.store.js'
 
 const router = useRouter()
+
 
 const feedback = ref('success')
 const message = ref('')
@@ -63,6 +65,8 @@ const inputs = ref({
 const try_login = async (e) => {
     e.preventDefault();
 
+    const store = useUserStore()
+
     const data_login = { mail: inputs.value.login.username.value, password: inputs.value.login.password.value }
     console.log(data_login);
     const response = await fetch('http://localhost:5000/api/user/login/', {
@@ -75,14 +79,16 @@ const try_login = async (e) => {
     console.log(is_user);
     if (is_user) {
         const res = await response.json()
+        store.actualUser = res;
+        console.log(store.actualUser);
         message.value = res.message
         feedback.value = 'success'
         window.localStorage.setItem('token', res.token);
         setTimeout(() => {
             /*
                 Task : Redirect to the real next route  
-            */      
-            router.push('/')
+*/
+        //    router.push('/admin')
         }, 2000);
     }
     else {
