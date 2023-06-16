@@ -57,7 +57,8 @@ const check_active_tab = (tab) => {
     padding: 40px 0px;
 }
 .tab_active {
-    background-color: red;
+    background-color: #0E2A47;
+    color: white;
 }
 .right {
     position: relative;
