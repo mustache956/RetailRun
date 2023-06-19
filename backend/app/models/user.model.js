@@ -42,14 +42,5 @@ UserSchema.methods.generateAuthToken = function(){
     return jwt.sign({user}, key);
 };
 
-UserSchema.methods.checkToken = function(){
-    const token = this.generateAuthToken();
-    try{
-        jwt.verify(token,key);
-        return true;
-    }catch (err){
-        return false;
-    }
-};
 
 module.exports = mongoose.model("User", UserSchema);

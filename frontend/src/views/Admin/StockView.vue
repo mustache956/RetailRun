@@ -21,6 +21,7 @@
 <script setup>
 
 import { ref, computed } from 'vue';
+import LogOutButton from "@/components/LogOutButton.vue";
 const list = ref([
     { id: 1, nom: 'John', rayon: 'Patisserie', prix: 25, quantite: 54 },
     { id: 2, nom: 'Jane', rayon: 'Surgelés', prix: 25, quantite: 54 },

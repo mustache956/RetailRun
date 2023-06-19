@@ -5,12 +5,8 @@
                 @update_value="(name) => { data.nom.value = name, message = '' }" :placeholder="data.nom.placeholder"
                 :type="data.nom.type">
             </FormInput>
-            <select class="div2" name="pets" id="pet-select" v-model="data.rayon">
-                <option value=""> Rayon </option>
-                <option value="Patisserie">Patisserie</option>
-                <option value="Fromage">Fromage</option>
-                <option value="Surgelés">Surgelés</option>
-            </select>
+            <FormSelect :options="data.rayons" @update_value="
+               (value_type) => {data.rayon = value_type;}"></FormSelect>
             <FormInput :svg_value="data.prix.svg" class="div3"
                 @update_value="(name) => { data.prix.value = name, message = '' }" :placeholder="data.prix.placeholder"
                 :type="data.prix.type">
@@ -28,7 +24,6 @@
                 <FormButton :type="'submit'"> Ajouter produit </FormButton>
             </div>
         </form>
-
     </div>
 </template> 
     
@@ -36,6 +31,9 @@
 import FormInput from '../../components/FormInput.vue';
 import FormButton from '../../components/FormButton.vue';
 import { ref } from 'vue';
+import FormSelect from "@/components/FormSelect.vue";
+import ProblemeView from "@/views/Admin/ProblemeView.vue";
+import LogOutButton from "@/components/LogOutButton.vue";
 
 const data = ref({
     nom: {
@@ -43,7 +41,8 @@ const data = ref({
         type: 'text',
         placeholder: 'nom',
     },
-    rayon: "",
+    rayons: ["Fruits et Légumes", "Epicerie", "Liquides", "Surgelés", "Produits non alimentaires"],
+    rayon: {type:""},
     prix: {
         value: "",
         type: 'number',
@@ -63,9 +62,9 @@ const data = ref({
 
 const addProduit = async () => {
     /* Backend ...  */
-    const response = await fetch('http://localhost:3005/api/addProduit', {
+    const response = await fetch('http://localhost:3005/api/createProduct/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json'},
         body: JSON.parse(JSON.stringify(data.value))
     })
 

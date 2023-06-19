@@ -11,14 +11,6 @@ const router = createRouter({
      // redirect: '/login'
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    },
-    {
       path: '/login',
       name: 'Login',
       component: () => import('../views/LoginView.vue')
@@ -37,6 +29,14 @@ const router = createRouter({
       path: '/admin',
       name: 'AdminHome', 
       component: () => import('../views/Admin/AdminHome.vue')
+    },
+    {
+      path: '/forgotPassword',
+      name: 'forgotPassword',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/ForgotPasswordView.vue')
     },
   ]
 })

@@ -19,6 +19,7 @@
 
 import { ref } from 'vue';
 import SingleProblem from '../../components/SingleProblem.vue';
+import LogOutButton from "../../components/LogOutButton.vue";
 
 const problems = ref([
     {

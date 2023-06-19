@@ -45,7 +45,7 @@ exports.logIn = (req, res) => {
         }
         else
         {
-            const token = user.generateAuthToken(req.body);
+            const token = user.generateAuthToken();
             res.send({user, token});
         }
 

@@ -16,7 +16,7 @@
                     @update_value="(value_password) => {inputs.login.password.value = value_password, message = ''}"
                     :placeholder="inputs.login.password.placeholder" :type="inputs.login.password.type">
                 </FormInput>
-                <small :onclick="forgot"> Forgot my password ? </small><br><br>
+                <small class="forgot_password" @click="this.$router.push('/forgotPassword')">Forgot my password ?</small><br><br>
                 <FormButton :type="'submit'"> Login </FormButton>
                 <br><br>
                 <FormFeedback v-if="message !== ''"
@@ -24,7 +24,6 @@
                     :feedback="feedback"> {{ message }}
                 </FormFeedback>
                 <br>
-
             </form>
         </div>
     </div>
@@ -77,18 +76,17 @@ const try_login = async (e) => {
     console.log(response.status);
     const is_user = response.status === 200;
     console.log(is_user);
-    if (is_user) {
-        const res = await response.json()
-        store.actualUser = res;
-        console.log(store.actualUser);
+    const res = await response.json();
+    if (is_user && res.token != null) {
+        store.setUser(res.user);
+        store.setToken(res.token);
         message.value = res.message
         feedback.value = 'success'
-        window.localStorage.setItem('token', res.token);
         setTimeout(() => {
             /*
                 Task : Redirect to the real next route  
 */
-        //    router.push('/admin')
+            router.push('/admin')
         }, 2000);
     }
     else {
@@ -98,9 +96,7 @@ const try_login = async (e) => {
 
 }
 
-const forgot = () => {
-    console.log("flemme")
-}
+
 
 </script>
 
@@ -109,6 +105,13 @@ const forgot = () => {
     padding: 30px 0px;
 }
 
+.forgot_password{
+    cursor: pointer;
+}
+
+.forgot_password:hover{
+    opacity: 0.7;
+}
 @media screen and (max-width: 1500px){
     #backgroundview{
         height: 130vh;

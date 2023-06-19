@@ -1,5 +1,5 @@
 <template>
-    <div id="adminhome">
+    <div id="adminhome" v-if="isAuthenticated">
         <div class="left">
             <button class="left_part" :class="{ tab_active: current_section === 'Ajouter' }" @click="check_active_tab('Ajouter'); current_component = AjouterView">
                 <h3> Ajouter un produit </h3>
@@ -16,18 +16,33 @@
             <component :is='current_component' />
         </div>
     </div>
+    <div id="backgroundview" v-else>
+        <div id="form">
+            <h1>Cannot acces the webpage because you are not logged in.</h1>
+            <div id="btns">
+                <button @click="this.$router.push('/login')" class="button">
+                    Go to Login
+                </button>
+            </div>
+        </div>
+    </div>
+    <LogOutButton></LogOutButton>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref, computed} from 'vue';
 import AjouterView from '../Admin/AjouterView.vue';
 import StockView from '../Admin/StockView.vue';
 import ProblemeView from '../Admin/ProblemeView.vue';
-
+import {useUserStore} from '../Admin/../../stores/auth.store.js';
+import LogOutButton from "../../components/LogOutButton.vue";
 // ajouter, stock et probleme
 const current_section = ref('Ajouter')
 const current_component = AjouterView
-
+const store = useUserStore();
+const isAuthenticated = computed(() => {
+    return store.isLoggedIn;
+});
 const check_active_tab = (tab) => {
     current_section.value = tab;
 };
@@ -68,5 +83,32 @@ const check_active_tab = (tab) => {
 }
 .right h1 {
     padding: 30px 0;
+}
+
+#btns {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10%;
+}
+
+.button {
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #37B3EA;
+    border-radius: 10px;
+    background-color: #37B3EA;
+    height: 60px;
+    width: 100%;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: #37B3EA;
+    background-color: white;
+    transition: background-color 0.5s linear;
 }
 </style>
