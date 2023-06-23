@@ -62,6 +62,12 @@ span {
 svg {
     margin: 0px 10px;
 }
+.btn-solve {
+    background-color: #dd0426;
+}
+.green .btn-solve {
+    background-color: #004b23;
+}
 .notif button {
     position: absolute;
     top: 0;
@@ -71,7 +77,6 @@ svg {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #dd0426;
     color: white;
     transition: all .2s
 }

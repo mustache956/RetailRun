@@ -87,6 +87,9 @@ const problems = logJSONData() */
     background-color: #4FCE66 !important;
     color: #004b23 !important;
 }
+#probleme .green .btn-solve {
+    background-color: blue !important;
+}
 
 .solved {
     padding: 40px 0px;
