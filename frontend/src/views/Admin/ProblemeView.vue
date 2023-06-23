@@ -1,54 +1,83 @@
 <template>
     <div id="probleme">
 
-        <h3 v-if="problems.some(element => element.solved === false)"> Non-solved problems </h3>
-        <span v-for="problem in problems" :key="problem.id">
-            <SingleProblem @solve_problem="handleSolveProblem(problem.id)" v-if="!problem.solved">{{
+        <h3 v-if="problems.some(element => element.status === false)"> Non-solved problems </h3>
+        <span v-for="problem in problems" :key="problem._id">
+            <SingleProblem @solve_problem="handleSolveProblem(problem._id)" v-if="!problem.status">{{
                 problem.description }}</SingleProblem>
         </span>
 
-        <h3 class="solved" v-if="problems.some(element => element.solved === true)"> Solved problems </h3>
-        <span class="green" v-for="problem in problems" :key="problem.id">
-            <SingleProblem @solve_problem="handleSolveProblem(problem.id)" v-if="problem.solved">{{
+        <h3 class="solved" v-if="problems.some(element => element.status === true)"> Solved problems </h3>
+        <span class="green" v-for="problem in problems" :key="problem._id">
+            <SingleProblem @solve_problem="handleSolveProblem(problem._id)" v-if="problem.status">{{
                 problem.description }}</SingleProblem>
         </span>
     </div>
 </template>
 
-<script setup lang="ts">
-
-import { ref } from 'vue';
-import SingleProblem from '../../components/SingleProblem.vue';
+<script>
 import LogOutButton from "../../components/LogOutButton.vue";
+import http from '../../../http-common';
+import SingleProblem from "../../components/SingleProblem.vue";
 
-const problems = ref([
-    {
-        id: 1,
-        type: " type ",
-        rayon: " Rayon ",
-        description: " Test with tomatoes ",
-        solved: false
+
+export default {
+  name: 'ProblemView',
+  components: {
+    SingleProblem
+  },
+  data() {
+    return {
+      problems: []
+    };
+  },
+  created() {
+    this.fetchProblems();
+  },
+  methods: {
+    fetchProblems() {
+      http.get('/problem/getAllProblems')
+        .then(response => {
+          this.problems = response.data;
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
-    {
-        id: 2,
-        type: " type ",
-        rayon: " Rayon ",
-        description: " Problem with plates ",
-        solved: false
+    deleteProblem(problemId) {
+     http.delete(`/problem/deleteProblem/${problemId}`)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
-    {
-        id: 3,
-        type: " type ",
-        rayon: " Rayon ",
-        description: " Just ",
-        solved: false
+    handleSolveProblem(problemId) {
+      const problem = this.problems.find(p => p._id === problemId);
+      if (problem) {
+        problem.status = true;
+        this.deleteProblem(problemId)
+      }
     }
-])
+  }
+};
+/* async function logJSONData() {
+  const response = await fetch("http://localhost:5000/api/problem/getAllProblems");
+  const jsonData = await response.json();
+  console.log(jsonData);
+  return jsonData
+}
 
-const handleSolveProblem = (id) => {
+const problems = logJSONData() */
+
+
+//problems.value.problemsTab = res;
+
+/* const handleSolveProblem = (id) => {
     const index = problems.value.findIndex(element => element.id === id);
     problems.value[index].solved = true
-}
+} */
 </script>
     
 <style scoped>

@@ -6,7 +6,7 @@
                 :type="data.nom.type">
             </FormInput>
             <FormSelect :options="data.rayons" @update_value="
-               (value_type) => {data.rayon = value_type;}"></FormSelect>
+               (value_type) => {data.rayon.type = value_type;}"></FormSelect>
             <FormInput :svg_value="data.prix.svg" class="div3"
                 @update_value="(name) => { data.prix.value = name, message = '' }" :placeholder="data.prix.placeholder"
                 :type="data.prix.type">
@@ -34,6 +34,7 @@ import { ref } from 'vue';
 import FormSelect from "@/components/FormSelect.vue";
 import ProblemeView from "@/views/Admin/ProblemeView.vue";
 import LogOutButton from "@/components/LogOutButton.vue";
+import http from '../../../http-common';
 
 const data = ref({
     nom: {
@@ -43,6 +44,9 @@ const data = ref({
     },
     rayons: ["Fruits et Légumes", "Epicerie", "Liquides", "Surgelés", "Produits non alimentaires"],
     rayon: {type:""},
+    image: "",
+    coordinates: ["",""],
+    promo:"",
     prix: {
         value: "",
         type: 'number',
@@ -60,16 +64,31 @@ const data = ref({
     },
 })
 
-const addProduit = async () => {
-    /* Backend ...  */
-    const response = await fetch('http://localhost:3005/api/createProduct/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.parse(JSON.stringify(data.value))
-    })
+const addProduit = async (e) => {
+    e.preventDefault();
+    const produit = {
+        name: data.value.nom.value,
+        price: data.value.prix.value,
+        image: data.value.image,
+        coordinates: JSON.parse(JSON.stringify(data.value.coordinates)),
+        promo: data.value.promo,
+        quantity: data.value.quantite.value
+    }
 
-    console.log(response)
-    console.log(response.json)
+    console.log(produit);
+    /* Backend ...  */
+    http
+        .post("/product/create",produit)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error.response.data);
+            if(error.response.status === 404){
+              alert("Can't add a product !");
+            }
+        });
+
 }
 </script>
     

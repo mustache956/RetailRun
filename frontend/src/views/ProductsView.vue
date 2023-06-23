@@ -43,6 +43,7 @@ export default {
     .then(response => {
       console.log(response)
       this.products = response.data
+      console.log(this.products[0])
     })
     .catch(e => {
       console.log(e)

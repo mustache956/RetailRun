@@ -19,9 +19,12 @@ exports.getAllProducts = (req, res) => {
 
 //Create a product
 exports.createProduct = (req, res) => {
+    console.log(req.body);
     let product = new Product(req.body);
+    console.log(product);
     product.save()
         .then(data => {
+            console.log(data);
             res.send(data);
         })
         .catch(err => {
