@@ -24,3 +24,17 @@ export const useUserStore = defineStore('user', {
   },
 })
 
+export const productStored = defineStore('product', {
+  state: () => ({ product: null, token: null}),
+  getters: {
+      getProduct(state){
+        return state.product;
+      }
+  },
+  actions: {
+    setProduct(product){
+      this.product = product;
+    }
+  },
+})
+

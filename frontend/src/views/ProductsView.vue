@@ -16,8 +16,10 @@
             <p class="product-price-text">{{ product.price }} €</p>
           </div>
           <div class="product-button-container">
-            <button class="product-button">
-              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="white"><path d="M527-120 413-413 120-527v-43l720-270-270 720h-43Zm18-114 192-503-502 192 224 86 86 225Zm-86-225Z"/></svg>
+            <button @click="goToMap(product)" class="product-button">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="white">
+                <path d="M527-120 413-413 120-527v-43l720-270-270 720h-43Zm18-114 192-503-502 192 224 86 86 225Zm-86-225Z"/>
+              </svg>
             </button>
           </div>
         </div>
@@ -29,9 +31,20 @@
 <script>
 
 import http from '../../http-common';
+import {productStored} from '../stores/auth.store.js'
 
 export default {
   name: 'ProductView',
+  
+  methods: {
+    goToMap(product) {
+      const store = productStored()
+      
+      store.setProduct(product)
+      this.$router.push({ path: '/map' });
+    }
+  },
+
   data () {
     return {
       search: '',

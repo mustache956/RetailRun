@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <img ref="map" src="../assets/magasinPlan.png" style="position: absolute; top: 0; left: 0; width: 525px; height: 100%;" />
     <svg ref="svg" width="528" height="415"></svg>
   </div>
@@ -9,14 +8,29 @@
 <script>
 import * as d3 from 'd3'; 
 import graphData from '@/assets/occupancy_graph.json';
+import {productStored} from '../stores/auth.store.js'
+
+
 
 export default {
+  name: 'Map',
+
   mounted() {
+  var product = JSON.stringify(productStored().getProduct)
+
+  product = JSON.parse(product)
+
+  const coordinates = product.coordinates;
+
   const graph = graphData;
   graph.width = 100;
   graph.height = 100;
-  const startNode = '20,0';
-  const endNode = '99,99';
+  const endNode = Math.round(coordinates[0])*10 + ',' + Math.round(coordinates[1])*10;
+  const startNode = '50,50';
+  console.log(endNode);
+
+
+  
   const path = aStar(graph, startNode, endNode);
 
 
