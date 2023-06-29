@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed} from 'vue';
+import {ref, computed, onMounted} from 'vue';
 import AjouterView from '../Admin/AjouterView.vue';
 import StockView from '../Admin/StockView.vue';
 import ProblemeView from '../Admin/ProblemeView.vue';
@@ -46,6 +46,10 @@ const isAuthenticated = computed(() => {
 const check_active_tab = (tab) => {
     current_section.value = tab;
 };
+
+
+
+
 
 </script>
 

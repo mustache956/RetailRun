@@ -34,6 +34,7 @@ const logOut = function(){
 
 .logout:hover {
     filter: brightness(0.8);
+
 }
 
 

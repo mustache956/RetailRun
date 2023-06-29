@@ -2,7 +2,8 @@
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const key = "ANFJFNJKKOJDJJNJNDSDLOKKIJI"
+const keyAuth = "ANFJFNJKKOJDJJNJNDSDLOKKIJI";
+const keyReset = "JDKJFJNNEPZMPOINCNSNHKSUEe";
 
 const UserSchema = mongoose.Schema({
     nom: {
@@ -39,8 +40,12 @@ UserSchema.methods.comparePassword = function(password){
 
 UserSchema.methods.generateAuthToken = function(){
     const user = this;
-    return jwt.sign({user}, key);
+    return jwt.sign({user}, keyAuth);
 };
 
+UserSchema.methods.generateResetToken = function(){
+    const userEmail = this.mail;
+    return jwt.sign({userEmail}, keyReset)
+}
 
 module.exports = mongoose.model("User", UserSchema);
