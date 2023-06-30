@@ -21,6 +21,12 @@ const router = createRouter({
       component: () => import('../views/ProductsView.vue')
     },
     {
+      path: '/map',
+      name: 'Map',
+      component: () => import('../views/MapView.vue'),
+      props: true
+    },
+    {
       path: '/signalProblem',
       name: 'SignalProblem',
       component: () => import('../views/SignalProblemView.vue')
