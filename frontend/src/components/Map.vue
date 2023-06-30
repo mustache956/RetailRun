@@ -1,32 +1,49 @@
 <template>
-  <div>
-    <img ref="map" src="../assets/magasinPlan.png" style="position: absolute; top: 0; left: 0; width: 525px; height: 100%;" />
-    <svg ref="svg" width="528" height="415"></svg>
+  <div class="content">
+    <div class="PathMap">
+        <svg ref="svg" width="550" height="450">
+          
+          <image
+            ref="map"
+            xlink:href="../assets/magasinPlan.png"
+            x="0"
+            y="0"
+            width="525"
+            height="415"
+            v-on:load="handleImageLoad"
+          ></image>
+          
+        </svg>
+    </div>
   </div>
 </template>
 
 <script>
-import * as d3 from 'd3'; 
+import * as d3 from 'd3';
 import graphData from '@/assets/occupancy_graph.json';
-import {productStored} from '../stores/auth.store.js'
+import {productStored} from '../stores/auth.store.js';
+import startNodeImage from '@/assets/ici.png';
 
 
 
 export default {
   name: 'Map',
+  
+  
+ 
 
   mounted() {
+
+  
   var product = JSON.stringify(productStored().getProduct)
-
   product = JSON.parse(product)
-
   const coordinates = product.coordinates;
 
   const graph = graphData;
   graph.width = 100;
   graph.height = 100;
   const endNode = Math.round(coordinates[0])*10 + ',' + Math.round(coordinates[1])*10;
-  const startNode = '50,50';
+  const startNode = '99,99';
   console.log(endNode);
 
 
@@ -35,12 +52,11 @@ export default {
 
 
   const svg = d3.select(this.$refs.svg);
-  const image = this.$refs.map;
+  // const image = this.$refs.map;
 
-  const imageWidth = this.$refs.map.width;
-  const imageHeight = image.clientHeight;
+  const imageWidth = this.$refs.map.width.baseVal.value;
+  const imageHeight = this.$refs.map.height.baseVal.value;
 
-    console.log(imageWidth, graph.width, imageHeight, graph.height)
 
   const scaleX = imageWidth / graph.width;
   const scaleY = imageHeight / graph.height;
@@ -50,7 +66,8 @@ export default {
     return { x: parseInt(x), y: parseInt(y) };
   });
 
-console.log(scaleX, scaleY)
+
+
 
   const line = d3
     .line()
@@ -68,14 +85,30 @@ group
   .style('stroke-width', 2)
   .style('fill', 'none');
 
-// Move the image to the back
-group.lower();
+console.log(startNodeImage)
 
-console.log(line(lineData))
+group
+  .append('image')
+  .attr('href', startNodeImage)
+  .attr('width', 40)
+  .attr('height', 40)
+  .attr('x', lineData[0].x * scaleX -20)
+  .attr('y', lineData[0].y * scaleY -40);
+
+group
+  .append('image') 
+  .attr('href', product.image)
+  .attr('width', 40)
+  .attr('height', 40)
+  .attr('x', lineData[lineData.length - 1].x * scaleX -20)
+  .attr('y', lineData[lineData.length - 1].y * scaleY -20)
+
+// Move the image to the back
+group.selectAll('path').raise();
+    group.select('image:first-child').raise();
+    group.select('image:last-child').raise();
 
 },
-
-
 };
 
 function calculateHeuristic(node, endNode) {
@@ -138,8 +171,33 @@ function aStar(graph, startNode, endNode) {
 </script>
 
 <style scoped>
-  svg {
+  /* svg {
     z-index: 1;
+  } */
+
+  .content {
+    display: flex;
+    justify-content: center;
+    margin:auto;
+    /* align-items: center; */
+    height: 100vh;
+  }
+
+  .PathMap {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* Adjust this value as needed */
+    overflow: hidden;
+  }
+
+  .map-image,
+  .map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 </style>
 
