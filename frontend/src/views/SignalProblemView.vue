@@ -3,23 +3,23 @@
         <div id="form">
             <form @submit="signalProblem">
                 <div class="top">
-                    <h1>SIGNALER UN PROBLEME</h1>
+                    <h1>Signaler un problème</h1>
                 </div>
-                <label>TYPE DE PROBLEME</label>
+                <label>Type de problème</label>
                <FormSelect :options="inputs.types" @update_value="
                (value_type) => {inputs.problem.type = value_type;}"></FormSelect>
                 <div v-if="inputs.problem.type === 'Autre'">
                     <label >NOUVEAU TYPE DE PROBLEME</label>
                     <FormInput  @update_value="(value_newType) => {inputs.problem.newType = value_newType;}" :svg_value="inputs.icons.svg" placeholder="Renseigner un nouveau problème" type="text"></FormInput>
                 </div>
-                <label>RAYON DU MAGASIN</label>
+                <label>Rayon</label>
                <FormSelect :options="inputs.store_shelves"
                            @update_value="(value_shelf) => {inputs.problem.store_shelf = value_shelf}"></FormSelect>
-                <label>DESCRIPTION</label>
+                <label>Description</label>
                 <FormTextArea
                         @update_value="(value_description) => {inputs.problem.description = value_description}"></FormTextArea>
                 <br>
-                <FormButton type="'submit'">Signal</FormButton>
+                <FormButton type="'submit'">Signaler</FormButton>
             </form>
         </div>
     </div>
@@ -143,5 +143,6 @@ const signalProblem = (e) => {
     }
 
 }
+
 
 </style>

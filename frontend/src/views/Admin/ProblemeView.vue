@@ -1,13 +1,12 @@
 <template>
     <div id="probleme">
-
-        <h3 v-if="problems.some(element => element.status === false)"> Non-solved problems </h3>
+        <h3 v-if="problems.some(element => element.status === false)"> Problèmes non résolus </h3>
         <span v-for="problem in problems" :key="problem._id">
             <SingleProblem @solve_problem="handleSolveProblem(problem._id)" v-if="!problem.status">{{
                 problem.description }}</SingleProblem>
         </span>
 
-        <h3 class="solved" v-if="problems.some(element => element.status === true)"> Solved problems </h3>
+        <h3 class="solved" v-if="problems.some(element => element.status === true)"> Problèmes résolus </h3>
         <span class="green" v-for="problem in problems" :key="problem._id">
             <SingleProblem @solve_problem="handleSolveProblem(problem._id)" v-if="problem.status">{{
                 problem.description }}</SingleProblem>

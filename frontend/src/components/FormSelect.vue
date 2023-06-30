@@ -28,5 +28,6 @@ select{
     border-radius: 5px;
     outline: none;
     height: 50px;
+    font-weight: 600;
 }
 </style>

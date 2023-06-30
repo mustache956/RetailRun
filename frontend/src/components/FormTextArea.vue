@@ -20,11 +20,11 @@
 
 textarea{
     width: 100%;
-    padding: 0px 20px;
+    padding: 10px 10px;
     border: 0px;
     border-radius: 5px;
     outline: none;
-    height: 50px;
+    height: 75px;
     resize: none;
 }
 

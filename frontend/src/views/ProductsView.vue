@@ -13,7 +13,7 @@
         </div>
         <div class="product-right-container">
           <div class="product-price-container">
-            <p class="product-price-text">{{ product.price }} €</p>
+            <p class="product-price-text">{{ formatPrice(product.price) }} €</p>
           </div>
           <div class="product-button-container">
             <button @click="goToMap(product)" class="product-button">
@@ -39,12 +39,16 @@ export default {
   methods: {
     goToMap(product) {
       const store = productStored()
-      
       store.setProduct(product)
       this.$router.push({ path: '/map' });
+    },
+    formatPrice(priceString) {
+      if (priceString.indexOf('.') !== -1) {
+        priceString = priceString.replace('.', ',');
+      }
+      return priceString;
     }
   },
-
   data () {
     return {
       search: '',
@@ -99,12 +103,15 @@ export default {
   height: 100px;
   background-color: #FFFFFF;
   border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .product-name-container {
   display: flex;
   justify-content: center;
   align-items: center; 
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .product-right-container {
@@ -127,10 +134,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .product-price-text {
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .product-button:hover {
@@ -159,6 +168,11 @@ export default {
   border-radius: 10px;
   border: 1px solid #ccc;
   outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+
 
 </style>

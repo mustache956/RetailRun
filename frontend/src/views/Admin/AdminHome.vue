@@ -1,13 +1,13 @@
 <template>
     <div id="adminhome" v-if="isAuthenticated">
         <div class="left">
-            <button class="left_part" :class="{ tab_active: current_section === 'Ajouter' }" @click="check_active_tab('Ajouter'); current_component = AjouterView">
+            <button class="tab-button left_part" :class="{ tab_active: current_section === 'Ajouter' }" @click="check_active_tab('Ajouter'); current_component = AjouterView">
                 <h3> Ajouter un produit </h3>
             </button>
-            <button class="left_part" :class="{ tab_active: current_section === 'Stock' }" @click="check_active_tab('Stock'); current_component = StockView">
+            <button class="tab-button left_part" :class="{ tab_active: current_section === 'Stock' }" @click="check_active_tab('Stock'); current_component = StockView">
                 <h3> Stock </h3>
             </button>
-            <button class="left_part" :class="{ tab_active: current_section === 'Probleme' }" @click="check_active_tab('Probleme'); current_component = ProblemeView">
+            <button class="tab-button left_part" :class="{ tab_active: current_section === 'Probleme' }" @click="check_active_tab('Probleme'); current_component = ProblemeView">
                 <h3> Problèmes signalés </h3>
             </button>
         </div>
@@ -95,24 +95,12 @@ const check_active_tab = (tab) => {
     margin-top: 10%;
 }
 
-.button {
-    text-decoration: none;
-    text-align: center;
-    border: 1px solid #37B3EA;
-    border-radius: 10px;
-    background-color: #37B3EA;
-    height: 60px;
-    width: 100%;
-    margin-right: 5px;
-    margin-left: 5px;
-    color: white;
-    outline: none;
+
+.tab-button:hover {
+    color: #37B3EA;
+    background-color: white;
+    transition: background-color 0.3s linear;
     cursor: pointer;
 }
 
-.button:hover {
-    color: #37B3EA;
-    background-color: white;
-    transition: background-color 0.5s linear;
-}
 </style>

@@ -1,22 +1,22 @@
 <template>
     <div id="ajouter">
         <form action="" @submit.prevent="addProduit">
-            <FormInput :svg_value="data.nom.svg" class="div1"
+            <FormInput :svg_value="data.nom.svg" class="add_input div1"
                 @update_value="(name) => { data.nom.value = name, message = '' }" :placeholder="data.nom.placeholder"
                 :type="data.nom.type">
             </FormInput>
             <FormSelect :options="data.rayons" @update_value="
                (value_type) => {data.rayon.type = value_type;}"></FormSelect>
-            <FormInput :svg_value="data.prix.svg" class="div3"
+            <FormInput :svg_value="data.prix.svg" class="add_input div3"
                 @update_value="(name) => { data.prix.value = name, message = '' }" :placeholder="data.prix.placeholder"
                 :type="data.prix.type">
             </FormInput>
-            <FormInput :svg_value="data.quantite.svg" class="div4"
+            <FormInput :svg_value="data.quantite.svg" class="add_input div4"
                 @update_value="(name) => { data.quantite.value = name, message = '' }" :placeholder="data.quantite.placeholder"
                 :type="data.quantite.type">
             </FormInput>
             <div class="form_part">
-                <FormInput :svg_value="data.caracteristiques.svg" class="div5"
+                <FormInput :svg_value="data.caracteristiques.svg" class="add_input div5"
                     @update_value="(name) => { data.caracteristiques.value = name, message = '' }" :placeholder="data.caracteristiques.placeholder"
                     :type="data.caracteristiques.type">
                 </FormInput>
@@ -40,7 +40,7 @@ const data = ref({
     nom: {
         value: "",
         type: 'text',
-        placeholder: 'nom',
+        placeholder: 'Nom',
     },
     rayons: ["Fruits et Légumes", "Epicerie", "Liquides", "Surgelés", "Produits non alimentaires"],
     rayon: {type:""},
@@ -132,4 +132,6 @@ form {
 /* .form_part {
     back
 } */
+
+
 </style>

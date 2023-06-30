@@ -1,6 +1,6 @@
 <template>
     <div id="stock">
-        <input v-model="filterQuery" placeholder="Rechercher un produit">
+        <input class="search-bar" v-model="filterQuery" placeholder="Rechercher un produit">
         <ul>
             <li>
                 <span>Nom</span>
@@ -60,4 +60,18 @@ ul li {
     margin: 10px 0px;
     padding: 20px;
 }
+
+.search-bar {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
 </style>
