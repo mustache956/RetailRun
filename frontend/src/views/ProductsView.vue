@@ -114,6 +114,10 @@ export default {
   font-weight: 600;
 }
 
+.product-image-container{
+    margin-top: 10px;
+}
+
 .product-right-container {
   display: flex;
   flex-direction: column;

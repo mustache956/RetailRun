@@ -3,7 +3,7 @@
         <panZoom :options="{minZoom: 0.5, maxZoom: 5}">
             <Map></Map>
         </panZoom>
-        <button class="button" @click="this.$router.push({ path: '/products' });">Products</button>
+        <button class="button" @click.capture="this.$router.push('/products')">Products</button>
         
     </div>
     

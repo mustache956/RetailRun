@@ -3,16 +3,16 @@
         <input class="search-bar" v-model="filterQuery" placeholder="Rechercher un produit">
         <ul>
             <li>
+                <span>Image produit</span>
                 <span>Nom</span>
-                <span>Rayon</span>
                 <span>Prix</span>
                 <span>Quantité</span>
             </li>
             <li v-for="item in filteredList" :key="item.id">
-                <span>{{ item.nom }}</span>
-                <span>{{ item.rayon }}</span>
-                <span>{{ item.prix }}</span>
-                <span>{{ item.quantite }}</span>
+                <img class="image" :src="item.image" alt="">
+                <span>{{ item.name }}</span>
+                <span>{{ formatPrice(item.price) }} €</span>
+                <span>{{ item.quantity }}</span>
             </li>
         </ul>
     </div>
@@ -20,20 +20,37 @@
     
 <script setup>
 
-import { ref, computed } from 'vue';
+import {ref, computed, onMounted} from 'vue';
 import LogOutButton from "@/components/LogOutButton.vue";
-const list = ref([
-    { id: 1, nom: 'John', rayon: 'Patisserie', prix: 25, quantite: 54 },
-    { id: 2, nom: 'Jane', rayon: 'Surgelés', prix: 25, quantite: 54 },
-    { id: 3, nom: 'Bob', rayon: 'Patisserie', prix: 25, quantite: 54 },
-    
+import http from "../../../http-common";
+var list = ref([
 ]);
+
+
+onMounted(() => {
+    http.get('/product/getAllProducts')
+        .then(response => {
+            console.log(response)
+            list.value = response.data
+            console.log(this.products[0])
+        })
+        .catch(e => {
+            console.log(e)
+        })
+})
+
+const formatPrice = function(priceString) {
+    if (priceString.indexOf('.') !== -1) {
+        priceString = priceString.replace('.', ',');
+    }
+    return priceString;
+}
 
 const filterQuery = ref('');
 
 const filteredList = computed(() => {
     const query = filterQuery.value.toLowerCase();
-    return list.value.filter(item => item.nom.toLowerCase().includes(query));
+    return list.value.filter(item => item.name.toLowerCase().includes(query));
 });
 
 </script>
@@ -72,6 +89,13 @@ ul li {
   font-size: 16px;
   font-weight: 600;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.image{
+    width:50px;
+}
+span{
+    padding-top: 15px;
 }
 
 </style>

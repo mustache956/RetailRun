@@ -8,7 +8,7 @@
 
         <h3 class="solved" v-if="problems.some(element => element.status === true)"> Problèmes résolus </h3>
         <span class="green" v-for="problem in problems" :key="problem._id">
-            <SingleProblem @solve_problem="handleSolveProblem(problem._id)" v-if="problem.status">{{
+            <SingleProblem  buttonText="Résolu" @solve_problem="handleSolveProblem(problem._id); " v-if="problem.status">{{
                 problem.description }}</SingleProblem>
         </span>
     </div>

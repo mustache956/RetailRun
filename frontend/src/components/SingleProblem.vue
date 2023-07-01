@@ -9,7 +9,7 @@
             </svg>
             <slot></slot>
         </span>
-        <button class="btn-solve" @click="resolve"> Résolu </button>
+        <button class="btn-solve" @click="resolve"> {{props.buttonText}} </button>
     </div>
 </template> 
     
@@ -20,6 +20,7 @@ const emit = defineEmits(['solve_problem']);
 const resolve = () => {
     emit('solve_problem');
 };
+
 
 const props = defineProps({
     svg_value: {
@@ -34,6 +35,10 @@ const props = defineProps({
         type: String,
         required: true
     },
+    buttonText: {
+        type: String,
+        default: 'Résoudre'
+    }
 })
 
 </script>
