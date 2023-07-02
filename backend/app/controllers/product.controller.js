@@ -24,7 +24,6 @@ exports.createProduct = (req, res) => {
     console.log(product);
     product.save()
         .then(data => {
-            console.log(data);
             res.send(data);
         })
         .catch(err => {
@@ -36,7 +35,7 @@ exports.createProduct = (req, res) => {
 
 //Delete a product
 exports.deleteProduct = (req, res) => {
-    Product.findByIdAndRemove(req.params.id)
+    Product.findByIdAndDelete(req.params.id)
         .then(product => {
             if(!product){
                 return res.status(404).send({message: "Product not found with id " + req.params.id});

@@ -7,10 +7,18 @@ const ProductSchema = mongoose.Schema({
         trim: true,
         required: true
     },
+    store_shelf: {
+      type: String,
+      trim: true,
+      required: true
+    },
     price: {
         type: String,
         trim: true,
         required: true
+    },
+    promo: {
+        type:String
     },
     image: {
         type: String,

@@ -7,6 +7,6 @@ module.exports = function(app){
     // post request for product creation
     app.post('/api/product/create', product.createProduct);
     // post request for user log in
-    app.post('/api/product/delete/:id', product.deleteProduct);
+    app.delete('/api/product/delete/:id', product.deleteProduct);
 
 }
