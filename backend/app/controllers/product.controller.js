@@ -33,6 +33,18 @@ exports.createProduct = (req, res) => {
         });
 };
 
+exports.updateProduct = (req, res) => {
+    Product.findByIdAndUpdate(req.body._id, req.body)
+        .then(() => {
+            res.send({message: "Product updated successfully !"});
+        })
+        .catch(err => {
+        res.status(500).send({
+            message: err.message
+        })
+    })
+}
+
 //Delete a product
 exports.deleteProduct = (req, res) => {
     Product.findByIdAndDelete(req.params.id)

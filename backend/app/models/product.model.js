@@ -33,6 +33,10 @@ const ProductSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true
+    },
+    status: {
+        type: Boolean,
+        default: false
     }
 });
 

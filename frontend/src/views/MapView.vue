@@ -42,7 +42,7 @@
     line-height: 24px;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 35%;
+    width: 100%;
     min-height: 56px;
     min-width: 120px;
     padding: 16px 20px;

@@ -11,6 +11,8 @@
                 <h3> Problèmes signalés </h3>
             </button>
         </div>
+        <p class="getUser"><strong>Bonjour</strong> {{getUser}}</p>
+        <LogOutButton></LogOutButton>
         <div class="right">
             <h1> {{ current_section }} </h1>
             <component :is='current_component' />
@@ -26,7 +28,6 @@
             </div>
         </div>
     </div>
-    <LogOutButton></LogOutButton>
 </template>
 
 <script setup lang="ts">
@@ -43,6 +44,9 @@ const store = useUserStore();
 const isAuthenticated = computed(() => {
     return store.isLoggedIn;
 });
+const getUser = computed(() => {
+    return store.getUser.mail;
+})
 const check_active_tab = (tab) => {
     current_section.value = tab;
 };
@@ -89,6 +93,12 @@ const check_active_tab = (tab) => {
     padding: 30px 0;
 }
 
+.getUser{
+    font-family: "Space Grotesk",-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 18px;
+    margin-top:15px;
+    margin-left: 10px;
+}
 #btns {
     display: flex;
     justify-content: space-around;
