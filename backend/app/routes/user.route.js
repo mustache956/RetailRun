@@ -9,6 +9,6 @@ module.exports = function(app){
     // post request for user log in
     app.post('/api/user/login/', user.logIn);
     // post request for reset passwords
-    app.post('/api/user/resetPassword', user.forgetPassword);
+    app.post('/api/user/changePassword', user.updatePassword);
 
 }

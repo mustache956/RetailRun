@@ -55,6 +55,56 @@ exports.logIn = (req, res) => {
     });
 };
 
+exports.findUser = (req,res) => {
+    User.findOne({mail: req.body.mail}).then(user => {
+        if(user == null){
+            res.status(401).json({message : 'Email not found in the database.'})
+        }
+        else {
+        res.send("User found")
+        }
+    })
+}
+
+exports.updatePassword = (req, res) => {
+    User.findOne({mail: req.body.mail}).then(user => {
+        if(user == null){
+            res.status(401).json({message : 'Email not found in the database.'})
+        }
+        else {
+            if (!user.comparePassword(req.body.previousPassword)){
+                res.status(403).json({ message: 'Authentication failed. Wrong password.' });
+            }
+            else{
+                //Find product and update it
+                User.findOneAndUpdate({ _id: user._id},
+                    {$set : {password: bcrypt.hashSync(req.body.nextPassword, 10)}},{new: true})
+                    .then(user => {
+                        if(!user) {
+                            return res.status(404).send({
+                                message: "User not found with id " +
+                                    user._id
+                            });
+                        }
+                        res.send(user);
+                    })
+                    .catch(err => {
+                        if(err.kind === 'ObjectId') {
+                            return res.status(404).send({
+                                message: "User not found with id " +
+                                    user._id
+                            });
+                        }
+                        return res.status(500).send({
+                            message: "Error updating user with id " +
+                                user._id
+                        });
+                    });
+            }
+        }
+    })
+};
+/*
 exports.forgetPassword = (req,res) => {
     User.findOne({mail: req.body.mail}).then(user => {
         if(user == null){
@@ -75,15 +125,15 @@ exports.forgetPassword = (req,res) => {
                 res.send(data);
      /*           // Envoie de l'e-mail de réinitialisation
                 const transporter = nodemailer.createTransport({
-                    service: 'gmail',
+                    service: '',
                     auth: {
-                        user: 'benjib221001@gmail.com',
-                        pass: 'Hellskitchen1'
+                        user: '',
+                        pass: ''
                     }
                 });
 
                 const mailOptions = {
-                    from: 'benjib221001@gmail.com',
+                    from: '',
                     to: mail,
                     subject: 'Réinitialisation de mot de passe',
                     text: `Cliquez sur le lien suivant pour réinitialiser votre mot de passe : http://localhost:8080/reset-password/${resetToken}`
@@ -97,7 +147,7 @@ exports.forgetPassword = (req,res) => {
                         console.log('E-mail de réinitialisation envoyé : ' + info.response);
                         res.send('Lien de réinitialisation envoyé à votre adresse e-mail.');
                     }
-                })*/
+                })
             }).catch(err => {
                     res.status(500).send({
                         message: err.message
@@ -106,4 +156,4 @@ exports.forgetPassword = (req,res) => {
         }
     })
 
-}
+}*/
